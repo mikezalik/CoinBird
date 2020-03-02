@@ -15,10 +15,10 @@ import java.util.Random;
 public class CoinBird extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture background;
-	Texture[] man;
-	Texture dizzyMan;
+	Texture[] bird;
+	Texture deadBird;
 
-	int manState = 0;
+	int birdState = 0;
 	int pause = 0;
 	int manY = 0;
 	Rectangle manRectangle;
@@ -49,12 +49,14 @@ public class CoinBird extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		background = new Texture("bg.png");
 
-		man = new Texture[4];
-		man[0] = new Texture ("frame-1.png");
-		man[1] = new Texture ("frame-2.png");
-		man[2] = new Texture ("frame-3.png");
-		man[3] = new Texture ("frame-4.png");
-		dizzyMan = new Texture ("dizzy-1.png");
+		bird = new Texture[6];
+		bird[0] = new Texture ("frame-1.png");
+		bird[1] = new Texture ("frame-2.png");
+		bird[2] = new Texture ("frame-3.png");
+		bird[3] = new Texture ("frame-4.png");
+		bird[4] = new Texture ("frame-5.png");
+		bird[5] = new Texture ("frame-6.png");
+		deadBird = new Texture ("deadBird.png");
 
 		coin = new Texture("coin.png");
 		bomb = new Texture("bomb.png");
@@ -125,10 +127,10 @@ public class CoinBird extends ApplicationAdapter {
 				pause++;
 			} else {
 				pause = 0;
-				if (manState < 3) {
-					manState++;
+				if (birdState < 3) {
+					birdState++;
 				} else {
-					manState = 0;
+					birdState = 0;
 				}
 			}
 
@@ -161,10 +163,10 @@ public class CoinBird extends ApplicationAdapter {
 			}
 		}
 		if (gameState == 2) {
-			batch.draw(dizzyMan, Gdx.graphics.getWidth() / 2 - man[manState].getWidth() / 2, manY);
+			batch.draw(deadBird, Gdx.graphics.getWidth() / 2 - bird[birdState].getWidth() / 2, manY);
 		} else {
-			batch.draw(man[manState], Gdx.graphics.getWidth() / 2 - man[manState].getWidth() / 2, manY);
-			manRectangle = new Rectangle(Gdx.graphics.getWidth() / 2 - man[manState].getWidth() / 2, manY, man[manState].getWidth(), man[manState].getHeight());
+			batch.draw(bird[birdState], Gdx.graphics.getWidth() / 2 - bird[birdState].getWidth() / 2, manY);
+			manRectangle = new Rectangle(Gdx.graphics.getWidth() / 2 - bird[birdState].getWidth() / 2, manY, bird[birdState].getWidth(), bird[birdState].getHeight());
 		}
 		for (int i = 0; i < coinRectangles.size(); i++) {
 			if (Intersector.overlaps(manRectangle, coinRectangles.get(i))) {
