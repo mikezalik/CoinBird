@@ -18,6 +18,8 @@ public class CoinBird extends ApplicationAdapter {
 	Texture[] bird;
 	Texture deadBird;
 
+	int sourceX = 0;
+
 	int birdState = 0;
 	int pause = 0;
 	int manY = 0;
@@ -86,9 +88,14 @@ public class CoinBird extends ApplicationAdapter {
 	@Override
 	public void render () {
 		batch.begin();
+		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.MirroredRepeat);
 		batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
+
+		sourceX += 2;
+
 		if (gameState == 1) {
+			batch.draw(background, 0, 0, sourceX, 1, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			//Coins
 			if (coinCount < 100) {
 				coinCount++;
@@ -185,7 +192,7 @@ public class CoinBird extends ApplicationAdapter {
 				gameState = 2;
 			}
 		}
-		font.draw(batch, String.valueOf(score), 100, 200);
+		font.draw(batch, String.valueOf(score), 100, 450);
 		font.getData().setScale(2, 2);
 
 		batch.end();
