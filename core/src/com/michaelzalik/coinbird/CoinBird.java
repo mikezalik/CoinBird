@@ -23,7 +23,7 @@ public class CoinBird extends ApplicationAdapter {
 	int manY = 0;
 	Rectangle manRectangle;
 
-	float gravity = 0.3f;
+	float gravity = 0.5f;
 	float velocity = 0;
 
 	ArrayList<Integer> coinX = new ArrayList<Integer>();
@@ -186,6 +186,7 @@ public class CoinBird extends ApplicationAdapter {
 			}
 		}
 		font.draw(batch, String.valueOf(score), 100, 200);
+		font.getData().setScale(2, 2);
 
 		batch.end();
 	}
